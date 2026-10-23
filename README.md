@@ -261,77 +261,8 @@ Cluster_agent/
 ```
 
 
-### 可以随时删除的缓存
 
-下列缓存不是项目成果；关闭正在运行的 Python/Notebook 后可以删除：
-
-```text
-scripts/__pycache__/
-__pycache__/
-```
-
-这些目录以后运行 Python 时可能自动重新生成，不需要提交或备份。
-
-### 当前保留但不参与新流程的历史数据
-
-以下文件和目录来自旧下载流程。它们不是新流程依赖，但可能包含有用的历史记录或补充材料，因此目前保留，不建议直接删除：
-
-```text
-data/cluster_complex.csv          # 旧版筛选结果，3198 条结构
-data/process_csv/import_cifs_log.csv  # 旧版 CIF 导入日志
-documents/doi_list.csv            # 旧版 DOI 清单
-documents/download_progress.json  # 旧版下载断点
-documents/browser_download_log.csv
-documents/pdf_filename_dedup_report.csv
-documents/metadata/               # 旧版文献元数据
-documents/si/                     # 已下载的补充材料
-documents/.旧批次文件或报告
-```
-
-如果以后确认不再需要旧流程记录，可以先整体备份，再删除这些历史文件。不要在未备份时删除 `documents/si/`，其中可能包含已经下载成功的补充材料。
-
-
-## 五、哪些内容必须备份
-
-重构或清理项目之前，至少备份：
-
-```text
-inputs/*.gcd
-data/filtered.gcd
-data/structures.csv
-CIFs/*.cif
-documents/pdf/*.pdf
-documents/md/*.md             # 已转换的 Markdown，可重建但建议备份
-documents/failed_dois.csv
-documents/download_log.csv
-documents/si/                 # 如果需要补充材料
-data/extracted_cards/*.json   # 已提取的结构基础卡片
-data/process_csv/si_required.csv         # 需要下载 SI 补充合成信息的 DOI
-```
-
-其中最重要的是：
-
-1. 原始 `.gcd`。
-2. 筛选后的 `structures.csv`。
-3. 已导出的 CIF。
-4. 已下载 PDF。
-5. 未成功 DOI 清单。
-
-## 六、当前数量说明
-
-以下是 **2026-09-19 的历史文件检查快照**，不代表当前文件数量：
-
-- `inputs/complex_cluster.gcd`：3294 个唯一 refcode。
-- 原始 `.gcd` 对应：1432 个唯一 DOI。
-- 旧 `data/cluster_complex.csv`：3198 条结构、1386 个唯一 DOI。
-- `CIFs/`：3198 个 CIF。
-- `documents/pdf/`：1403 个 PDF 文件。
-
-旧 CSV 和原始 `.gcd` 数量不同，是因为旧 CSV 已经过筛选。后续应以新流程生成的 `data/filtered.gcd` 和 `data/structures.csv` 为准。
-
-
-
-## 七、MinerU PDF → Markdown
+## 四、MinerU PDF → Markdown
 
 文献提取采用 **Markdown 优先、PDF 兜底** 的流程。先在终端设置 `MINERU_API_KEY`，然后运行 `start.ipynb` 的第 5 步，或执行：
 
@@ -376,7 +307,7 @@ CIF 提取器只在唯一匹配的文章化合物报告核数大于 20 时才添
 这只是一个算法参考，而不是作者定义的结构单元或合成路径。缺失的对称键、部分金属占位、不匹配的位点数量或断开的图会以状态/原因的形式抑制分区。
 在 `start.ipynb` 的第29单元格中，`CIF_CARD_EXECUTE=False` 会执行一个三文件候选扫描，但不会写入卡片；将其设置为 `True` 才会写入。现有卡片默认会被跳过；只有在有意刷新卡片时才设置 `CIF_CARD_OVERWRITE=True`，然后在使用它们作为结构数据前，对照图表和附录检查结果。
 
-## 笔记本恢复和对账（新项目）
+## 笔记本恢复和对账
 
 一次运行 `start.ipynb` 的一个步骤，而不是全部运行。第4和第5节会跳过已有效的PDF或非空Markdown；如果某项失败，可以通过再次执行同一单元格重试。
 非空Markdown仍可能质量较差，所以检查第5.1节。第6节的提取失败有多种原因（包括超时和验证错误），不一定是缺少SI。第6.3节将文章卡片的CCDC标识符与DOI关联的 `data/structures.csv` 进行比较；保存其报告，然后第6.1节可以将目录/卡片不匹配项作为整个卡片重提取的候选。第6.2节仍然使用基于文件夹的方式。提取不会修改审计报告。第7节在现有卡片上使用仅SI的综合补丁。
