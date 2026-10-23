@@ -1,6 +1,7 @@
 # Cluster Agent：CCDC 文献与结构导出
 
 本项目保留一条从 CCDC 数据到文献结构卡片的工作流：
+
 0. 先用conquest从CCDC中初步筛选结构，并导出refcode list（`.gcd`）。(不在此项目文件夹内进行)
 1. 从 CCDC 导出的 refcode list（`.gcd`）中进一步筛选 refcode。
 2. 从筛选后的 `.gcd` 导出 `refcode / doi / formula / ccdc_number` CSV。
