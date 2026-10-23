@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rare-earth Literature Extractor"
+  short_description: "Extract rare-earth structure cards from papers"
+  default_prompt: "Use $rare-earth-literature-extractor to extract verified rare-earth compound structure cards from MinerU Markdown with PDF fallback; keep SI-needed DOI entries in the separate CSV ledger."

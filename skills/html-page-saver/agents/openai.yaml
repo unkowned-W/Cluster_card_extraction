@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML and File Saver"
+  short_description: "Save HTML, article PDFs, and supplementary files"
+  default_prompt: "Use $html-page-saver to save web pages as HTML or direct article PDF/supplementary-information files, with selectable JavaScript/CSS for HTML and authorized browser challenge handling."

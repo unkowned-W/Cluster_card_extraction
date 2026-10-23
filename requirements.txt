@@ -1,0 +1,7 @@
+﻿# 这个项目必须使用 CSD 自带的 Python 环境。
+# 安装前确认当前 python 属于正确配置的 CSD 环境；不要另建普通 .venv。
+# ccdc 由本机已授权的 CSD 安装提供，不通过 pip 安装，也不列入本文件。
+# 除 ccdc 外，项目 scripts 中已核实的唯一第三方 Python 包是 requests。
+
+# MinerU API client
+requests>=2.31

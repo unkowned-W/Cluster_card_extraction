@@ -1,0 +1,11 @@
+.env
+*.env
+__pycache__/
+*.pyc
+Large_cluster_samples/
+rare_earth_cluster_skill/
+data/
+Cards/
+CIFs/
+documents/
+inputs/

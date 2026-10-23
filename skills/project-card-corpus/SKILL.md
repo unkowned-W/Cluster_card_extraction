@@ -1,0 +1,28 @@
+---
+name: project-rare-earth-card-corpus
+description: Search and reason over the full local rare-earth synthesis, CIF structure, and review card corpus. Use for project-wide compound lookup, evidence-backed comparisons, structural matching and provenance; not for current literature or validated lab protocols.
+---
+
+# Full-project rare-earth card corpus
+
+This skill uses the full card corpus in `data/` relative to the project root. The index is an extracted, fallible representation, not primary-source verification. Answer in the user's language.
+
+## Retrieval and linkage
+
+1. Start with `data/process_csv/project_card_ledger.csv`, not a scan of all JSON files. Run `python skills/project-card-corpus/scripts/search_ledger.py --help` (or the project's CSD Python interpreter) for exact `--doi`, `--compound-key`, `--ccdc`, `--refcode`, and element/reagent/family/shape/nuclearity or `--similar-to` queries. Search only compound rows first; inspect a small shortlist's original cards before answering.
+2. `compound_key = DOI#compound[index]` identifies a card entry, not a globally stable chemical identity. `--reagent` covers any reagent role; `--ligand` searches only explicit ligand role tags. Empty means unknown. Similarity ranking offers candidates, not proven isostructurality.
+3. Exact CCDC/refcode links take precedence over DOI. Check `linked_compound_keys` and `match_cardinality` on the structure row; >1 is ambiguous. `matched_local_cif_card` means a local card matched. `no_corresponding_cif` means no exact local structure-card match and, per the project owner’s manual review, no corresponding CIF for this project compound. This is project-curated evidence, not a fresh CCDC database check; do not claim the database has no entry solely from this status. The separate `data/final_integrity_ledger.csv` tracks file-level gaps; do not conflate it with chemical evidence. Reviews remain independent contextual evidence.
+4. Rebuild the index with `python skills/project-card-corpus/scripts/build_ledger.py` (preview `--check`). This writes only `data/process_csv/project_card_ledger.csv`. Do not edit generated columns manually. See `references/ledger_schema.md`. For present-day literature or authoritative confirmation, consult primary sources separately.
+## Evidence discipline
+
+- **Synthesis**: `data/extracted_cards/<DOI-normalized>.json` contains an article's `list_of_rare_earth_compounds`. Identify the *specific compound*, its `synthesis`, `material_class`, `properties`, `source_locations`, and whether SI was used. A paper-level condition must not be transferred to another compound in the same article. Preserve quantities, units, solvent, temperature, duration, pH, vessel, and workup as reported; absent/null fields mean *not available in this card*, not zero or ambient. Do not convert a reported route into a guaranteed reproducible protocol.
+- **Structure**: `data/cif_structure_cards/<refcode>.json` includes `atom_sites_available`, `bond_table_available`, `metal_framework`, `candidate_structural_motifs`, `geometry_basis`, and `interpretation_limit`. If the matched CIF card is absent, answer available article-reported formula/structure description from the synthesis card **as article-level evidence**, but say that crystallographic parameters, independently checked connectivity, and topology are unavailable here; do not simply erase the article description. Distinguish article-reported formula/description from CIF-derived observations and algorithmic candidate motifs. If graph data are missing or symmetry bonds omitted, do not claim established connectivity, module assignment, molecular shape, oxidation states, or ligand roles from formula/site count alone. A metal–metal separation is not necessarily a bond. Nuclearity can be article-matched rather than independently derived from the CIF.
+- **Review**: `data/review_knowledge_cards/<card_id>.json` contains `claim`, `scope`, `conditions`, `caveats`, `basis`, and `evidence_locations`. Apply a claim only inside its stated scope. Distinguish neutral beam clusters, coordination clusters, oxo clusters, and heterometallic clusters; do not universalize review trends or infer a specific synthetic condition from a general claim.
+- **Cross-card reasoning**: label each sentence or bullet as directly reported, computed/derived, plausible inference, or unverified proposal when the distinction matters. For numerical comparisons, check definitions (rare-earth count vs total metals; formula unit vs discrete core), units, experimental conditions, and whether data come from the same measurement method. Highlight contradictions or encoding anomalies and verify against primary article/CIF before treating them as facts. Never fabricate a citation, an absent parameter, or a successful synthesis.
+
+## Answer format
+
+Give a direct answer, then a compact evidence table or bullets with **specific local file path + JSON field (and compound label/index)**, DOI or CCDC/refcode where available, followed by uncertainty and next verification. Cite review claims with `card_id` and DOI. For a speculative design request, provide an evidence-backed rationale and *hypotheses to test*, not a claim of validated chemistry; laboratory execution needs primary-source and safety review. If the local corpus cannot answer, say so and distinguish corpus absence from scientific impossibility. Browse primary sources when the user asks for current literature or authoritative verification; label that evidence separately from the local cards.
+
+For task-oriented prompt patterns and an initial validation protocol, read `references/prompts.md`. Do not automatically run the evaluation for every answer.
+

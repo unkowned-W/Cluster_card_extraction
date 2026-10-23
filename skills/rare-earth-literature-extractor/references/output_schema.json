@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "doi": {
+      "type": "string"
+    },
+    "list_of_rare_earth_compounds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "compound_label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "compound_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "formula": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ccdc_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ccdc_refcodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "material_class": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "material_type": {
+                "type": "string",
+                "enum": [
+                  "cluster",
+                  "complex",
+                  "unknown"
+                ]
+              },
+              "nuclearity": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "metal_composition": {
+                "type": "string",
+                "enum": [
+                  "homometallic",
+                  "heterometallic",
+                  "unknown"
+                ]
+              },
+              "rare_earth_elements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "other_metal_elements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dimensionality": {
+                "type": "string",
+                "enum": [
+                  "0D",
+                  "1D",
+                  "2D",
+                  "3D",
+                  "unknown"
+                ]
+              },
+              "structural_family": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "material_type",
+              "nuclearity",
+              "metal_composition",
+              "rare_earth_elements",
+              "other_metal_elements",
+              "dimensionality",
+              "structural_family"
+            ]
+          },
+          "synthesis": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "main_text_has_explicit_synthesis": {
+                "type": "boolean"
+              },
+              "si_used": {
+                "type": "boolean"
+              },
+              "procedure": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reagents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "formula": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "role": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "amount": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "formula",
+                    "role",
+                    "amount"
+                  ]
+                }
+              },
+              "solvents": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "temperature": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ph": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "vessel_or_method": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "workup_and_crystallization": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "yield": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "main_text_has_explicit_synthesis",
+              "si_used",
+              "procedure",
+              "reagents",
+              "solvents",
+              "temperature",
+              "time",
+              "ph",
+              "vessel_or_method",
+              "workup_and_crystallization",
+              "yield"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "reported": {
+                "type": "boolean"
+              },
+              "property_type": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "magnetic",
+                  "optical",
+                  "both"
+                ]
+              },
+              "summary": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "measurements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "property_type": {
+                      "type": "string",
+                      "enum": [
+                        "magnetic",
+                        "optical"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "unit": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "conditions": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "property_type",
+                    "name",
+                    "value",
+                    "unit",
+                    "conditions"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "reported",
+              "property_type",
+              "summary",
+              "measurements"
+            ]
+          },
+          "source_locations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "main_text",
+                    "supporting_information",
+                    "external_metadata",
+                    "unknown"
+                  ]
+                },
+                "location": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "field",
+                "source",
+                "location"
+              ]
+            }
+          },
+          "structure_description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "compound_label",
+          "compound_name",
+          "formula",
+          "ccdc_numbers",
+          "ccdc_refcodes",
+          "material_class",
+          "synthesis",
+          "properties",
+          "source_locations"
+        ]
+      }
+    }
+  },
+  "required": [
+    "title",
+    "doi",
+    "list_of_rare_earth_compounds"
+  ]
+}

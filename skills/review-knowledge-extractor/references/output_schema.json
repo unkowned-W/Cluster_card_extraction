@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "doi",
+    "title",
+    "md_file",
+    "cards"
+  ],
+  "properties": {
+    "doi": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "md_file": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "claim",
+          "explanation",
+          "scope",
+          "conditions",
+          "caveats",
+          "evidence_locations",
+          "basis"
+        ],
+        "properties": {
+          "category": {
+            "enum": [
+              "synthesis_strategy",
+              "structural_pattern",
+              "structure_property_relationship",
+              "mechanistic_interpretation",
+              "method_comparison",
+              "limitation",
+              "other"
+            ]
+          },
+          "claim": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caveats": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "basis": {
+            "enum": [
+              "review_synthesis",
+              "cited_example"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

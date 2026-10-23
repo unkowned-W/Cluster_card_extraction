@@ -1,0 +1,140 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "doi",
+    "updates"
+  ],
+  "properties": {
+    "doi": {
+      "type": "string"
+    },
+    "updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "compound_index",
+          "synthesis",
+          "si_location"
+        ],
+        "properties": {
+          "compound_index": {
+            "type": "integer"
+          },
+          "si_location": {
+            "type": "string"
+          },
+          "synthesis": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "procedure": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reagents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "name",
+                    "formula",
+                    "role",
+                    "amount"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "formula": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "role": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "amount": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "solvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "temperature": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ph": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "vessel_or_method": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "workup_and_crystallization": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "yield": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "procedure",
+              "reagents",
+              "solvents",
+              "temperature",
+              "time",
+              "ph",
+              "vessel_or_method",
+              "workup_and_crystallization",
+              "yield"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
